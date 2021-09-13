@@ -1,0 +1,13 @@
+name: 'AzUtils - The toolbox for all AzActions'
+description: 'Loads all the utility modules for all other AzAction GitHub actions.'
+branding:
+  icon: 'activity'
+  color: 'green'
+
+runs:
+  using: "composite"
+  steps:
+      - name: AzUtilities
+        shell: pwsh
+        run: |
+          . "$env:GITHUB_ACTION_PATH\Scripts\main.ps1"

@@ -1,0 +1,32 @@
+name: Action-Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - action.yml
+      - .github/workflows/Action-Test.yml
+      - Modules/**
+      - Scripts/**
+      - Tests/**
+
+jobs:
+
+  DefaultTest:
+    strategy:
+      matrix:
+        os: [ubuntu-latest,windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install AzUtilities
+        uses: equinor/AzUtilities@v1
+
+      - name: Get module
+        shell: pwsh
+        run: |
+          Get-Module -ListAvailable
+
+      - name: Test module (autoloading)
+        shell: pwsh
+        run: |
+          "" | IsNullOrEmpty
